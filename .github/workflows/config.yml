@@ -9,16 +9,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Build and start services
+        run: docker compose up -d --build  # -d запустит контейнеры в фоновом режиме
+
       - name: Run UI-tests via docker compose
         env:
           LOGIN: ${{ secrets.LOGIN }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          docker compose up --exit-code-from regression || true
+          docker compose run regression pytest --alluredir=allure-results || true  # Запускаем pytest и сохраняем отчёт
+
+      - name: Check if Allure is installed
+        run: |
+          docker compose run regression which allure  # Проверяем, есть ли allure
+          docker compose run regression allure --version  # Проверяем версию
 
       - name: Generate Allure report
         run: |
-          sudo docker compose run regression /bin/sh -c "allure generate allure-results --clean -o allure-report"
+          docker compose run regression /bin/sh -c "allure generate allure-results --clean -o allure-report"
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
