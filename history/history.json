@@ -4,11 +4,19 @@
       "failed" : 0,
       "broken" : 1,
       "skipped" : 0,
-      "passed" : 0,
+      "passed" : 1,
       "unknown" : 0,
-      "total" : 1
+      "total" : 2
     },
     "items" : [ {
+      "uid" : "16d3189804dce431",
+      "status" : "passed",
+      "time" : {
+        "start" : 1739112652861,
+        "stop" : 1739112657861,
+        "duration" : 5000
+      }
+    }, {
       "uid" : "73350413496b21e4",
       "status" : "broken",
       "statusDetails" : "selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button data-v-10d463b7=\"\" data-v-6653c066=\"\" type=\"submit\" class=\"oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space\">...</button> is not clickable at point (1789, 709). Other element would receive the click: <div data-v-d5bfe35b=\"\" class=\"oxd-form-loader\">...</div>\n  (Session info: headless chrome=112.0.5615.165)",
